@@ -6,7 +6,7 @@
 (defn div-by? [x y]
   (zero? (mod x y)))
 
-(defn is-prime?* [n]
+(defn is-prime? [n]
   (loop [t (dec n)]
     (cond
       (= t 1) true
@@ -14,13 +14,9 @@
       (div-by? n t) false
       :else (recur (dec t)))))
 
-(def is-prime? (memoize is-prime?*))
-
 (def primes (filter is-prime? (range)))
 
-(declare prime-factors)
-
-(defn prime-factors* [n]
+(defn prime-factors [n]
   (loop [[prime & primes] primes
          acc []]
     (cond
@@ -28,8 +24,6 @@
       (div-by? n prime) (into (conj acc prime) (prime-factors (/ n prime)))
       :else (recur primes acc))))
 
-(def prime-factors (memoize prime-factors*))
-
 (comment
-  (last (prime-factors 13195)) ;; => 29
+  (last (prime-factors 13195))
   (last (prime-factors 600851475143)))
