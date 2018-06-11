@@ -16,14 +16,13 @@
 
 (def primes (filter is-prime? (range)))
 
-(defn prime-factors [n]
-  (loop [[prime & primes] primes
-         acc []]
+(defn largest-prime-factor [n]
+  (loop [[prime & primes] primes]
     (cond
-      (is-prime? n) (conj acc n)
-      (div-by? n prime) (into (conj acc prime) (prime-factors (/ n prime)))
-      :else (recur primes acc))))
+      (is-prime? n) n
+      (div-by? n prime) (largest-prime-factor (/ n prime))
+      :else (recur primes))))
 
 (comment
-  (last (prime-factors 13195))
-  (last (prime-factors 600851475143)))
+  (largest-prime-factor 13195)
+  (largest-prime-factor 600851475143))
