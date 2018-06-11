@@ -13,4 +13,4 @@
                :let [p (* x y)]
                :when (palindrome? p)]
            p)]
-  (reduce max -1 ps))
+  (reduce max ps))
