@@ -6,13 +6,16 @@
 (defn divides? [n d]
   (zero? (mod n d)))
 
-(defn divide-down [n p d]
-  (if (divides? n d)
-    (recur (/ n d) d d)
-    [n p]))
+(defn divide-down
+  ([n d]
+   (divide-down n -1 d))
+  ([n p d]
+   (if (divides? n d)
+     (recur (/ n d) d d)
+     [n p])))
 
 (defn largest-prime-factor [n]
-  (let [[n p] (divide-down n -1 2)
+  (let [[n p] (divide-down n 2)
         limit (-> (Math/sqrt n) (inc) (int))]
     (loop [[n p] [n p]
            odds (range 3 limit 2)]
