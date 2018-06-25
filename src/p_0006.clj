@@ -6,6 +6,6 @@
   (* n n))
 
 (let [nats (range 1 101)
-      sum-square (->> nats (map square) (reduce +))
+      sum-square (->> nats (reduce #(+ %1 (square %2))))
       square-sum (->> nats (reduce +) square)]
   (- square-sum sum-square))
