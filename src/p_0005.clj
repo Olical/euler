@@ -15,10 +15,11 @@
 
 (defn smallest-divides [n]
   (loop [x 1]
-    (if (divides-evenly-into-range? n x)
+    (if (and (even? x) (divides-evenly-into-range? n x))
       x
       (recur (inc x)))))
 
 (comment
+  (require '[clojure.test :as t])
   (smallest-divides 10)
-  (smallest-divides 20))
+  (t/is (= (smallest-divides 20) 232792560)))
